@@ -1,6 +1,7 @@
 package com.kaya.auth.authserver.controller;
 
 import com.kaya.auth.authserver.dto.PermissionCreateDTO;
+import com.kaya.auth.authserver.dto.PermissionQueryDTO;
 import com.kaya.auth.authserver.dto.PermissionResponseDTO;
 import com.kaya.auth.authserver.dto.PermissionUpdateDTO;
 import com.kaya.auth.authserver.service.impl.PermissionService;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -25,13 +25,8 @@ public class PermissionController {
   private PermissionService permissionService;
 
   @GetMapping
-  public List<PermissionResponseDTO> getAll() {
-    return permissionService.getAll();
-  }
-
-  @GetMapping("{code}")
-  public PermissionResponseDTO get(@PathVariable("code") String code) {
-    return permissionService.get(code);
+  public List<PermissionResponseDTO> query(PermissionQueryDTO queryDTO) {
+    return permissionService.query(queryDTO);
   }
 
   @PostMapping
@@ -39,10 +34,10 @@ public class PermissionController {
     return permissionService.create(createDTO);
   }
 
-  @PatchMapping
+  @PatchMapping("{code}")
   public PermissionResponseDTO update(
-      @RequestParam("code") String permission_code,
+      @PathVariable("code") String code,
       @RequestBody @Valid PermissionUpdateDTO permissionUpdateDTO) {
-    return permissionService.update(permission_code, permissionUpdateDTO);
+    return permissionService.update(code, permissionUpdateDTO);
   }
 }

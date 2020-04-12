@@ -1,12 +1,14 @@
 package com.kaya.auth.authserver.service;
 
 import com.kaya.auth.authserver.dto.PermissionCreateDTO;
+import com.kaya.auth.authserver.dto.PermissionQueryDTO;
 import com.kaya.auth.authserver.dto.PermissionResponseDTO;
 import com.kaya.auth.authserver.dto.PermissionUpdateDTO;
 import com.kaya.auth.authserver.entity.Permission;
 import com.kaya.auth.authserver.exception.PermissionNotFoundException;
 import com.kaya.auth.authserver.repository.PermissionRepository;
 import com.kaya.auth.authserver.service.impl.PermissionService;
+import com.kaya.auth.authserver.specification.PermissionSpecification;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,19 +22,12 @@ public class PermissionServiceImpl implements PermissionService {
   PermissionRepository permissionRepository;
 
   @Override
-  public List<PermissionResponseDTO> getAll() {
-    return permissionRepository.findAll().stream()
-        .map(PermissionResponseDTO::new)
-        .collect(Collectors.toList());
-  }
+  public List<PermissionResponseDTO> query(PermissionQueryDTO queryDTO) {
 
-  @Override
-  public PermissionResponseDTO get(String code) {
+    List<Permission> permissions =
+        permissionRepository.findAll(new PermissionSpecification(queryDTO));
 
-    return new PermissionResponseDTO(
-        permissionRepository
-            .findByCode(code)
-            .orElseThrow(() -> new PermissionNotFoundException(code)));
+    return permissions.stream().map(PermissionResponseDTO::new).collect(Collectors.toList());
   }
 
   @Override

@@ -1,6 +1,7 @@
 package com.kaya.auth.authserver.repository;
 
 import com.kaya.auth.authserver.entity.Permission;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface PermissionRepository extends JpaRepository<Permission, String> {
 
-  List<Permission> findAll();
+  List<Permission> findAll(Specification<Permission> specification);
 
   Optional<Permission> findByCode(String code);
 }
