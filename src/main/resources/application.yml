@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/auth_service"
+    username: "auth_service"
+    password: "auth_service"
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  application:
+    name: "auth-service"
