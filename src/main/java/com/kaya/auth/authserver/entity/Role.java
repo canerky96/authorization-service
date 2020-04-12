@@ -15,6 +15,8 @@ import java.util.List;
 @Getter
 @Setter
 public class Role extends BaseEntity {
+
+  private static final long serialVersionUID = -6050278768130377436L;
   @NotNull private String code;
   @NotNull private String name;
 

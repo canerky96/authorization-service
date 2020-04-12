@@ -17,6 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 public class AuthUser extends BaseEntity {
 
+  private static final long serialVersionUID = 5426856794243258850L;
   private String password;
   private String username;
   private Boolean isAccountNonExpired;

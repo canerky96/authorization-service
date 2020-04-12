@@ -17,6 +17,8 @@ import java.time.OffsetDateTime;
 @Setter
 public class BaseEntity implements Serializable {
 
+  private static final long serialVersionUID = -278971545601962170L;
+
   @Id
   @GeneratedValue(generator = "uuid2")
   @GenericGenerator(name = "uuid2", strategy = "uuid2")

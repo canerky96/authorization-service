@@ -14,6 +14,8 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class Permission extends BaseEntity {
 
+  private static final long serialVersionUID = -7274223417883492920L;
+
   public Permission(PermissionCreateDTO createDTO) {
     this.code = createDTO.getCode();
     this.name = createDTO.getName();
